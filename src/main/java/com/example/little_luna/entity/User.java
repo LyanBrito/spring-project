@@ -3,14 +3,14 @@ package com.example.little_luna.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tb_jogos")
-public class Jogos {
+@Table(name = "usuario")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
-    private String descricao;
-    private String genero;
+    private String email;
+    private String senha;
 
 
 }
