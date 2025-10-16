@@ -3,30 +3,37 @@ package com.example.little_luna.controller;
 import com.example.little_luna.entity.User;
 import com.example.little_luna.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class UserController {
     @Autowired
-    UserRepo userr;
+    UserRepo userRepo;
 
-    @PostMapping
-    public User salvar() {
-        User Banana = new User("sdfghgfd@com", "Bananal", "b4n4n4");
-        return userr.save(Banana);
+    @PostMapping(value = "/user/cadastro")
+    public ResponseEntity<?> saveUser(@RequestBody User user) {
+        User usuario = new User(user.getNome(), user.getEmail(), user.getSenha());
+        userRepo.save(user);
+
+        return ResponseEntity.ok(usuario);
+//        Augusto galeigo
     }
 
-    @GetMapping
-    public List<User> mostrar() {
-        List<User> users = userr.findAll();
-//        users.add(Banana);
-        return users;
-//      return user.findAll();
+    @PostMapping(value = "/user/login/")
+    public ResponseEntity<?> login(@RequestBody User user) {
+
+        User findUser = userRepo.findByEmail(user.getEmail());
+        if (findUser == null) {
+            return ResponseEntity.ok("Usuario não encontrado");
+        } else {
+            if (findUser.getSenha().equals(user.getSenha())) {
+                return ResponseEntity.ok("Logado com sucesso");
+            } else {
+                return ResponseEntity.ok("Senha incorreta");
+            }
+        }
     }
-
-
 }

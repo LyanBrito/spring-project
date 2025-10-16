@@ -8,7 +8,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected long id;
+    protected int id;
     @Column(length = 50, nullable = false)
     protected String nome;
     @Column(length = 50, nullable = false)
@@ -17,7 +17,6 @@ public class User {
     protected String senha;
 
     public User(String email, String senha, String nome) {
-
         this.email = email;
         this.senha = senha;
         this.nome = nome;
@@ -39,7 +38,7 @@ public class User {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
