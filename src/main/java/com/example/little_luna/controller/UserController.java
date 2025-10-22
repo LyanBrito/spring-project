@@ -4,11 +4,10 @@ import com.example.little_luna.entity.User;
 import com.example.little_luna.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     @Autowired
     UserRepo userRepo;
@@ -21,7 +20,10 @@ public class UserController {
         return ResponseEntity.ok(usuario);
 //        Augusto galeigo
     }
-
+    @GetMapping(value = "/user/listar")
+    public ResponseEntity<?> listar() {
+        return ResponseEntity.ok(userRepo.findAll());
+    }
     @PostMapping(value = "/user/login/")
     public ResponseEntity<?> login(@RequestBody User user) {
 
