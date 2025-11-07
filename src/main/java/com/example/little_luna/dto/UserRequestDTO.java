@@ -1,11 +1,11 @@
 package com.example.little_luna.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class UserRequestDTO {
-    @NotBlank(message = "bota bota na pipoquinha")
+    @NotBlank(message = "bota alguma coisa macho")
     @Column(length = 50, nullable = false)
     protected String nome;
     @NotBlank(message = "bota bota na pipoquinha")
@@ -20,6 +20,7 @@ public class UserRequestDTO {
     public UserRequestDTO() {
 
     }
+
     public UserRequestDTO(String email, String senha, String nome) {
         this.email = email;
         this.senha = senha;
