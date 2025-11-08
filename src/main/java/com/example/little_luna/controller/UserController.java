@@ -1,4 +1,4 @@
-package com.list.todolist2.controller;
+package com.example.little_luna.controller;
 
 import com.example.little_luna.dto.UserRequestDTO;
 import com.example.little_luna.dto.UserResponseDTO;
@@ -77,9 +77,9 @@ public class UserController {
 
         if (UserExisty.isPresent()) {
             User u = UserExisty.get();
-            u.setUsername(user.getUsername());
+            u.setNome(user.getNome());
             u.setEmail(user.getEmail());
-            u.setPassword(user.getSenha());
+            u.setSenha(user.getSenha());
             userRepository.save(u);
             return ResponseEntity.ok(u.toString());
         }else {

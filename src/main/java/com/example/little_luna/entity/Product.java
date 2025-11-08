@@ -16,18 +16,21 @@ public class Product {
     private double price;
     @Column(length = 50, nullable = false)
     private int quant;
-    @Column(length = 50, nullable = false)
-    private double subPrice;
 
     public Product() {
+
     }
-
-
-    public Product(String name, double price, int quant, double subPrice) {
+    public Product(int id, String nome, double price, int quant) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.quant = quant;
-        this.subPrice = subPrice;
+    }
+
+    public Product(String name, double price, int quant) {
+        this.name = name;
+        this.price = price;
+        this.quant = quant;
     }
 
     public int getId() {
@@ -42,17 +45,19 @@ public class Product {
         return name;
     }
 
+    public void setName(String name) {}
+
     public double getPrice() {
         return price;
     }
+
+    public void setPrice(double price) {}
 
     public int getQuant() {
         return quant;
     }
 
-    public double getSubPrice() {
-        return subPrice;
-    }
+    public void setQuant(int quant) {}
 }
 
 

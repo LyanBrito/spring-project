@@ -1,5 +1,6 @@
 package com.example.little_luna.dto;
 
+import com.example.little_luna.entity.User;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -15,6 +16,9 @@ public class UserResponseDTO {
     @NotBlank(message = "Coloca essa porra, caralho")
     @Size(min = 8, max = 20, message = "Tem que colocar no tamanho da tua pica, média")
     private String password;
+
+    public UserResponseDTO(User user) {
+    }
 
     public String getEmail() {
         return email;
