@@ -16,7 +16,7 @@ public class User {
     @Column(length = 50, nullable = false)
     protected String senha;
 
-    public User(String email, String senha, String nome) {
+    public User(String nome, String email, String senha) {
         this.email = email;
         this.senha = senha;
         this.nome = nome;
