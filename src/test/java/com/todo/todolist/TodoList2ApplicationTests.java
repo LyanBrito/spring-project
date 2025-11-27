@@ -1,10 +1,10 @@
-package com.example.little_luna;
+package com.todo.todolist;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LittleLunaApplicationTests {
+class TodoList2ApplicationTests {
 
     @Test
     void contextLoads() {
