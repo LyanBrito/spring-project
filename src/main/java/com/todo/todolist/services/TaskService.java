@@ -1,7 +1,7 @@
 package com.todo.todolist.services;
 
+import com.todo.todolist.dto.TaskRequestDTO;
 import com.todo.todolist.dto.TaskResponseDTO;
-import com.todo.todolist.dto.UserRequestDTO;
 import com.todo.todolist.entiryModel.Task;
 import com.todo.todolist.repository.TaskRepo;
 import jakarta.validation.Valid;
@@ -19,7 +19,7 @@ public class TaskService {
         this.taskRepo = taskRepo;
     }
 
-    public TaskResponseDTO saveTask(@Valid UserRequestDTO req) {
+    public TaskResponseDTO saveTask(@Valid TaskRequestDTO req) {
         Task task = new Task(req);
         taskRepo.save(task);
         return new TaskResponseDTO(task);

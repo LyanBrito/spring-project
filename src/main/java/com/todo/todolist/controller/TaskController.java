@@ -1,5 +1,6 @@
 package com.todo.todolist.controller;
 
+import com.todo.todolist.dto.TaskRequestDTO;
 import com.todo.todolist.dto.UserRequestDTO;
 import com.todo.todolist.entiryModel.Task;
 import com.todo.todolist.services.TaskService;
@@ -17,7 +18,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addTask(@Valid @RequestBody UserRequestDTO req) {
+    public ResponseEntity<?> addTask(@Valid @RequestBody TaskRequestDTO req) {
         return ResponseEntity.ok(taskService.saveTask(req));
     }
 
