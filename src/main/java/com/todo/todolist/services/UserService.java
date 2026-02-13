@@ -2,7 +2,9 @@ package com.todo.todolist.services;
 
 import com.todo.todolist.dto.UserRequestDTO;
 import com.todo.todolist.dto.UserResponseDTO;
-import com.todo.todolist.entiryModel.User;
+import com.todo.todolist.entityModel.Task;
+import com.todo.todolist.entityModel.User;
+import com.todo.todolist.repository.TaskRepo;
 import com.todo.todolist.repository.UserRepo;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,11 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepo userRepo;
+    private final TaskRepo taskRepo;
 
-    public UserService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo, TaskRepo taskRepo) {
         this.userRepo = userRepo;
+        this.taskRepo = taskRepo;
     }
 
     public String login(User user) {

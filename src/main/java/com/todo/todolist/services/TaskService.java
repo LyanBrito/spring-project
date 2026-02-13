@@ -2,62 +2,59 @@ package com.todo.todolist.services;
 
 import com.todo.todolist.dto.TaskRequestDTO;
 import com.todo.todolist.dto.TaskResponseDTO;
-import com.todo.todolist.entiryModel.Task;
+import com.todo.todolist.entityModel.Task;
+import com.todo.todolist.entityModel.User;
 import com.todo.todolist.repository.TaskRepo;
-import jakarta.validation.Valid;
+import com.todo.todolist.repository.UserRepo;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TaskService {
-    private final TaskRepo taskRepo;
 
-    public TaskService(TaskRepo taskRepo) {
-        this.taskRepo = taskRepo;
+    private final TaskRepo taskRepository;
+    private final UserRepo userRepository;
+
+    public TaskService(TaskRepo taskRepository, UserRepo userRepository) {
+        this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
     }
 
-    public TaskResponseDTO saveTask(@Valid TaskRequestDTO req) {
-        Task task = new Task(req);
-        taskRepo.save(task);
+    public List<TaskResponseDTO> getTasks() {
+        List<Task> tasks = taskRepository.findAll();
+        return tasks.stream().map(TaskResponseDTO::new).toList();
+    }
+    public TaskResponseDTO getTasksByUser(long user_id) {
+        User user = userRepository.findById(user_id);
+        return new TaskResponseDTO(taskRepository.findByUser(user));
+    }
+
+    public TaskResponseDTO addTask(TaskRequestDTO taskRequestDTO, long userId) {
+        User user = userRepository.findById(userId);
+        Task task = new Task(taskRequestDTO);
+        task.setUser(user);
+        taskRepository.save(task);
         return new TaskResponseDTO(task);
     }
 
-    public List<TaskResponseDTO> findAll() {
-        List<Task> tasks = taskRepo.findAll();
-        List<TaskResponseDTO> taskResponseDTO = new ArrayList<>();
-
-        for (Task task : tasks) {
-            taskResponseDTO.add(new TaskResponseDTO(task));
-        }
-        return taskResponseDTO;
-    }
-    public String updateById(Long id, Task task) {
-        Optional<Task> isTask = taskRepo.findById(id);
-
-        if (isTask.isPresent()) {
-            Task t = isTask.get();
-            t.setName(task.getName());
-            t.setDescription(task.getDescription());
-            t.setCreatedDate(task.getCreatedDate());
-            taskRepo.save(t);
-            return t.toString();
+    public String updateName(long id, Task taskRequestDTO) {
+        Task task = taskRepository.getById(id);
+        if (task == null) {
+            return "tarefa não encontrada";
         } else {
-            return "Task bnot found";
+            task.setName(taskRequestDTO.getName());
+            taskRepository.save(task);
+            return "tarefa atualizado com sucesso";
         }
     }
-    public Optional<Task> getById(long id) {
-        return Optional.ofNullable(taskRepo.findById(id));
-    }
-
-    public String deleteById(long id) {
-        taskRepo.deleteById(id);
-        if (!taskRepo.existsById(id)) {
-            return "Deletado com sucesso!";
-        } else {
-            return "User não deletado";
+    public String deleteTask(long id) {
+        Task task = taskRepository.getById(id);
+        if (task == null) {
+            return "tarefa não encontrada";
+        } else  {
+            taskRepository.delete(task);
+            return "tarefa deletado com sucesso";
         }
     }
 }
