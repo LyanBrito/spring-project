@@ -1,7 +1,10 @@
-package com.todo.todolist.entiryModel;
+package com.todo.todolist.entityModel;
 
 import com.todo.todolist.dto.UserRequestDTO;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_users")
@@ -15,6 +18,8 @@ public class User {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks = new ArrayList<>();
 
     public User(UserRequestDTO req) {
         this.email = req.getEmail();
@@ -58,6 +63,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }
 

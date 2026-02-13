@@ -1,4 +1,4 @@
-package com.todo.todolist.entiryModel;
+package com.todo.todolist.entityModel;
 
 public enum Status {
     PENDING,

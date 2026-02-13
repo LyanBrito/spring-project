@@ -1,4 +1,4 @@
-package com.todo.todolist.entiryModel;
+package com.todo.todolist.entityModel;
 
 import com.todo.todolist.dto.TaskRequestDTO;
 import jakarta.persistence.*;
@@ -19,6 +19,10 @@ public class Task {
     private LocalDate createdDate;
     @Column(nullable = false)
     private Status status;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Task() {
 
@@ -78,5 +82,13 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
