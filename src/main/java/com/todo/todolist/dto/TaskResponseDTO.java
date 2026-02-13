@@ -1,13 +1,14 @@
 package com.todo.todolist.dto;
 
-import com.todo.todolist.entiryModel.Status;
-import com.todo.todolist.entiryModel.Task;
-import com.todo.todolist.entiryModel.User;
+import com.todo.todolist.entityModel.Status;
+import com.todo.todolist.entityModel.Task;
+import com.todo.todolist.entityModel.User;
 
 public class TaskResponseDTO {
     private String name;
     private String description;
     private Status status;
+    private User user;
 
     public TaskResponseDTO() {
     }
@@ -15,6 +16,7 @@ public class TaskResponseDTO {
         this.name = task.getName();
         this.description = task.getDescription();
         this.status = task.getStatus();
+        this.user = task.getUser();
     }
 
     public String getDescription() {
@@ -27,5 +29,9 @@ public class TaskResponseDTO {
 
     public Status getStatus() {
         return status;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

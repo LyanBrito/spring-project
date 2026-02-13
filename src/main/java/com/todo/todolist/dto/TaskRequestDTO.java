@@ -1,7 +1,8 @@
 package com.todo.todolist.dto;
 
-import com.todo.todolist.entiryModel.Status;
-import com.todo.todolist.entiryModel.Task;
+import com.todo.todolist.entityModel.Status;
+import com.todo.todolist.entityModel.Task;
+import com.todo.todolist.entityModel.User;
 
 import java.time.LocalDate;
 
@@ -11,6 +12,7 @@ public class TaskRequestDTO {
     private LocalDate dueDate;
     private LocalDate createdDate;
     private Status status;
+    private User user;
 
     public TaskRequestDTO() {
     }
@@ -21,6 +23,7 @@ public class TaskRequestDTO {
         this.dueDate = task.getDueDate();
         this.name = task.getName();
         this.status = task.getStatus();
+        this.user = task.getUser();
     }
 
     public LocalDate getCreatedDate() {
@@ -61,5 +64,13 @@ public class TaskRequestDTO {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
