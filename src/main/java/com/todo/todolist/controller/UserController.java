@@ -1,7 +1,7 @@
 package com.todo.todolist.controller;
 
 import com.todo.todolist.dto.UserRequestDTO;
-import com.todo.todolist.entiryModel.User;
+import com.todo.todolist.entityModel.User;
 import com.todo.todolist.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

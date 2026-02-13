@@ -1,9 +1,9 @@
 package com.todo.todolist.controller;
 
 import com.todo.todolist.dto.TaskRequestDTO;
-import com.todo.todolist.dto.UserRequestDTO;
-import com.todo.todolist.entiryModel.Task;
+import com.todo.todolist.entityModel.Task;
 import com.todo.todolist.services.TaskService;
+import jakarta.validation.Path;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,27 +17,27 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @PostMapping
-    public ResponseEntity<?> addTask(@Valid @RequestBody TaskRequestDTO req) {
-        return ResponseEntity.ok(taskService.saveTask(req));
+    @PostMapping("/user/{userId}/task")
+    public ResponseEntity<?> addTask(@Valid @RequestBody TaskRequestDTO req, @PathVariable long userId) {
+        return ResponseEntity.ok(taskService.addTask(req, userId));
     }
 
-    @GetMapping
+    @GetMapping("/findAll")
     public ResponseEntity<?> getAllUsers() {
-        return ResponseEntity.ok(taskService.findAll());
+        return ResponseEntity.ok(taskService.getTasks());
     }
 
-    @GetMapping
-    public ResponseEntity<?> getUserById(@Valid @PathVariable Long id) {
-        return ResponseEntity.ok(taskService.getById(id));
+    @GetMapping("/user/{id}/task")
+    public ResponseEntity<?> getTaskByUser(@Valid @PathVariable Long id) {
+        return ResponseEntity.ok(taskService.getTasksByUser(id));
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deleteUserById(@Valid @PathVariable Long id) {
-        return ResponseEntity.ok(taskService.deleteById(id));
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteTaskById(@Valid @PathVariable Long id) {
+        return ResponseEntity.ok(taskService.deleteTask(id));
     }
     @PutMapping
     public ResponseEntity<?> updateUser(@Valid @RequestBody Long id, Task task) {
-        return ResponseEntity.ok(taskService.updateById(id, task));
+        return ResponseEntity.ok(taskService.updateName(id, task));
     }
 }
