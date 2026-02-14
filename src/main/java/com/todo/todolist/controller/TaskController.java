@@ -36,7 +36,8 @@ public class TaskController {
     public ResponseEntity<?> deleteTaskById(@Valid @PathVariable Long id) {
         return ResponseEntity.ok(taskService.deleteTask(id));
     }
-    @PutMapping
+
+    @PutMapping("/updateTask/{id}")
     public ResponseEntity<?> updateUser(@Valid @RequestBody Long id, Task task) {
         return ResponseEntity.ok(taskService.updateName(id, task));
     }

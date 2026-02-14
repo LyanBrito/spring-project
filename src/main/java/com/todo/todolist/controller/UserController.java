@@ -16,26 +16,27 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/newUser")
     public ResponseEntity<?> addUser(@Valid @RequestBody UserRequestDTO req) {
         return ResponseEntity.ok(userService.save(req));
     }
 
-    @GetMapping
+    @GetMapping("/showAll")
     public ResponseEntity<?> getAllUsers() {
         return ResponseEntity.ok(userService.findAll());
     }
 
-    @GetMapping
+    @GetMapping("/showUser/{id}")
     public ResponseEntity<?> getUserById(@Valid @PathVariable Long id) {
         return ResponseEntity.ok(userService.getById(id));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteUser/{id}")
     public ResponseEntity<?> deleteUserById(@Valid @PathVariable Long id) {
         return ResponseEntity.ok(userService.deleteById(id));
     }
-    @PutMapping
+
+    @PutMapping("/updateUser/{id}")
     public ResponseEntity<?> updateUser(@Valid @RequestBody Long id, User user) {
         return ResponseEntity.ok(userService.updateById(id, user));
     }
