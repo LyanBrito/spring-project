@@ -2,10 +2,14 @@ package com.todo.todolist.entityModel;
 
 import com.todo.todolist.dto.TaskRequestDTO;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "tb_tasks")
 public class Task {
     @Id
@@ -24,71 +28,6 @@ public class Task {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Task() {
-
-    }
-
     public Task(TaskRequestDTO req) {
-        this.createdDate = req.getCreatedDate();
-        this.description = req.getDescription();
-        this.dueDate = req.getDueDate();
-        this.name = req.getName();
-        this.status = req.getStatus();
-    }
-
-    public LocalDate getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
