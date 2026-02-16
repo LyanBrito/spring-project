@@ -18,7 +18,7 @@ public class UserController {
 
     @PostMapping("/newUser")
     public ResponseEntity<?> addUser(@Valid @RequestBody UserRequestDTO req) {
-        return ResponseEntity.ok(userService.save(req));
+        return ResponseEntity.ok(userService.saveUser(req));
     }
 
     @GetMapping("/showAll")

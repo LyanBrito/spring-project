@@ -36,15 +36,14 @@ public class UserService {
         }
     }
 
-    public UserResponseDTO save(UserRequestDTO req) {
-        User u = new User(req.getName(), req.getEmail(), req.getPassword());
+    public UserResponseDTO saveUser(UserRequestDTO req) {
+        User u = new User(req);
         userRepo.save(u);
         return new UserResponseDTO(u);
     }
 
-
     public List<UserResponseDTO> findAll() {
-        System.out.println("Users mostrados com sucesso");
+        System.out.println("Usuarios mostrados com sucesso");
         List<User> users = userRepo.findAll();
         List<UserResponseDTO> userResponseDTO = new ArrayList<>();
 
@@ -78,7 +77,7 @@ public class UserService {
             userRepo.save(u);
             return u.toString();
         } else {
-            return "User bnot found";
+            return "User not found";
         }
     }
 }
